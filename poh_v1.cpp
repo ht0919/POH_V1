@@ -17,23 +17,29 @@ int main(void) {
         std::cin >> price[i];
     }
  
-    // キャンペーン設定金額に最も複合金額の算出と表示
+    // キャンペーン設定金額の取得
     for( int i=0; i < day_campaign; i++) {
-        std::cin >> set_price; // キャンペーン設定金額の取得
+        std::cin >> set_price;
+        // 最大複合金額のクリア
         max_combi = 0;
-        for( int j=0; j < num_goods-1; j++) { // 商品の数-1だけ繰り返す
-          for( int k=j+1; k < num_goods; k++) { // 自分以降の商品の数だけ繰り返す
-              combi = price[j] + price[k];
-              // 複合金額が設定金額を超えていたら次の商品へ
-              if (combi > set_price) continue;
-              // 複合金額が最大金額を超えていたら代入 
-              if (combi > max_combi) max_combi = combi;
-              // 複合価格が設定金額と同じなら次の設定金額へ
-              if (combi == set_price) break;
+        // 商品の数-1だけ繰り返す
+        for( int j=0; j < num_goods-1; j++) {
+            // 商品金額が設定金額以上なら次の商品へ
+            if (price[j] > set_price) continue;
+            // 自分以降の商品の数だけ繰り返す
+            for( int k=j+1; k < num_goods; k++) {
+                combi = price[j] + price[k];
+                // 複合金額が設定金額以上なら次の商品へ
+                if (combi > set_price) continue;
+                // 複合金額が最大金額以上なら最大金額に代入 
+                if (combi > max_combi) max_combi = combi;
+                // 最大価格が設定金額と同じなら次の日へ
+                if (max_combi == set_price) break;
           }
-          if (max_combi == set_price) break; // 複合価格が設定金額と同じなら次の設定金額へ
+          // 最大価格が設定金額と同じなら次の日へ
+          if (max_combi == set_price) break;
         }
-        std::cout << max_combi << std::endl; // 設定金額に最も近い複合金額を表示
+        std::cout << max_combi << std::endl;
     }
     delete[] price;
     return 0;
