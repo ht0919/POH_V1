@@ -23,12 +23,12 @@ class  poh_v1 {
             int max_combi=0;
             // ¤•i‚Ì”-1‚¾‚¯ŒJ‚è•Ô‚·
             for (int j=0; j < num_goods-1; j++) {
-                // ¤•i‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚çŸ‚Ö
+                // ¤•i‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚çŸ‚Ì¤•i‚Ö
                 if (price[j] >= set_price) continue;
                 // ©•ªˆÈ~‚Ì¤•i‚Ì”‚¾‚¯ŒJ‚è•Ô‚·
                 for (int k=j+1; k < num_goods; k++) {
                     int combi = price[j] + price[k];
-                    // •¡‡‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚ç‚Æ“¯‚¶‚È‚çŸ‚Ì“ú‚Ö
+                    // •¡‡‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚ç‚Æ“¯‚¶‚È‚çŸ‚Ì¤•i‚Ö
                     if (combi > set_price) continue;
                     // •¡‡‹àŠz‚ªÅ‘å‹àŠzˆÈ‰º‚È‚çÅ‘å‹àŠz‚É‘ã“ü
                     if (combi > max_combi) max_combi = combi;
