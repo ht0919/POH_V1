@@ -10,34 +10,35 @@ class  poh_v1 {
 
         // ¤•i‹àŠz‚Ìæ“¾
         int[] price = new int[num_goods];
-        for (int i=0; i<num_goods; i++) {
+        for (int i=0; i < num_goods; i++) {
             String[] s = br.readLine().split(" ");
             price[i] = Integer.parseInt(s[0]);
         }
 
         // ƒLƒƒƒ“ƒy[ƒ“İ’è‹àŠz‚Ìæ“¾
-        int[] set_price = new int[day_campaign];
-        for (int i=0; i<day_campaign; i++) {
-            String[] s = br.readLine().split(" ");
-            set_price[i] = Integer.parseInt(s[0]);
-        }
-
-        // ƒLƒƒƒ“ƒy[ƒ“İ’è‹àŠz‚ÉÅ‚à‹ß‚¢•¡‡‹àŠz‚ÌZo‚Æ•\¦
-        for (int i=0; i<day_campaign; i++) { // ƒLƒƒƒ“ƒy[ƒ“‚Ì“ú”•ªŒJ‚è•Ô‚·
+        for (int i=0; i < day_campaign; i++) {
+            String s = br.readLine();
+            int set_price = Integer.parseInt(s);
+            // Å‘å•¡‡‰¿Ši‚ÌƒNƒŠƒA
             int max_combi=0;
-            for (int j=0; j<num_goods-1; j++) { // ¤•i‚Ì”-1‚¾‚¯ŒJ‚è•Ô‚·
-                for (int k=j+1; k<num_goods; k++) { // ©•ªˆÈ~‚Ì¤•i‚Ì”‚¾‚¯ŒJ‚è•Ô‚·
+            // ¤•i‚Ì”-1‚¾‚¯ŒJ‚è•Ô‚·
+            for (int j=0; j < num_goods-1; j++) {
+                // ¤•i‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚çŸ‚Ö
+                if (price[j] >= set_price) continue;
+                // ©•ªˆÈ~‚Ì¤•i‚Ì”‚¾‚¯ŒJ‚è•Ô‚·
+                for (int k=j+1; k < num_goods; k++) {
                     int combi = price[j] + price[k];
-                    if (combi == set_price[i]) { // •¡‡‹àŠz‚ªİ’è‹àŠz‚Æ“¯‚¶‚È‚çŸ‚Ö
-                        max_combi = combi;
-                        break;
-                    } else if (combi <= set_price[i] && combi > max_combi) {
-                        max_combi = combi;
-                    }
+                    // •¡‡‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚ç‚Æ“¯‚¶‚È‚çŸ‚Ì“ú‚Ö
+                    if (combi > set_price) continue;
+                    // •¡‡‹àŠz‚ªÅ‘å‹àŠzˆÈ‰º‚È‚çÅ‘å‹àŠz‚É‘ã“ü
+                    if (combi > max_combi) max_combi = combi;
+                    // Å‘å‹àŠz‚ªİ’è‹àŠz‚Æ“¯‚¶‚È‚çŸ‚Ì“ú‚Ö
+                    if (max_combi == set_price) break;
                 }
-                if (max_combi == set_price[i]) break; // •¡‡‹àŠz‚ªİ’è‹àŠz‚È‚çŸ‚Ö
+                // Å‘å‹àŠz‚ªİ’è‹àŠz‚Æ“¯‚¶‚È‚çŸ‚Ì“ú‚Ö
+                if (max_combi == set_price) break;
             }
-            System.out.println(max_combi); // İ’è‹àŠz‚ÉÅ‚à‹ß‚¢•¡‡‹àŠz‚ğ•\¦
+            System.out.println(max_combi);
         }
     }
 }
