@@ -6,24 +6,31 @@ fscanf(STDIN,"%d %d", $num_goods, $day_campaign);
 for ( $i=0; $i < $num_goods; $i++ ) {
     fscanf(STDIN, "%d", $price[$i]);
 }
-sort($price); // 商品金額を並べ替えておく（高速化のため）
+// 商品金額の並べ替え
+sort($price);
 
 // キャンペーン設定金額の取得
 for ( $i=0; $i < $day_campaign; $i++ ) {
-    fscanf(STDIN, "%d", $set_price[$i]);
+    fscanf(STDIN, "%d", $set_price);
+    // 最大金額のクリア
     $max_combi = 0;
-    for ( $j=0; $j < $num_goods-1; $j++ ) { // 商品の数-1だけ繰り返す
-        for ( $k=$j+1; $k < $num_goods; $k++ ) { // 自分以降の商品の数だけ繰り返す
+    // 商品の数-1だけ繰り返す
+    for ( $j=0; $j < $num_goods-1; $j++ ) {
+        // 商品金額が設定金額以上なら次の商品へ
+        if ($price[$j] >= $set_price) continue;
+        // 自分以降の商品の数だけ繰り返す
+        for ( $k=$j+1; $k < $num_goods; $k++ ) {
             $combi = $price[$j] + $price[$k];
-            if ($combi == $set_price[$i]) { // 複合金額が設定金額なら次へ
-                $max_combi = $combi;
-                break;
-            } else if ($combi < $set_price[$i] && $combi > $max_combi) {
-                $max_combi = $combi;
-            }
+            // 複合金額が設定金額より大きいなら次の商品へ
+            if ($combi > $set_price) continue;
+            // 複合金額が最大金額より大きいなら最大金額に代入
+            if ($combi > $max_combi) $max_combi = $combi;
+            //最大金額が設定金額と同じなら次の日へ
+            if ($max_combi == $set_price) break;
         }
-        if ($max_combi == $set_price[$i]) break; // 腹腔金額が設定金額なら次へ
+        //最大金額が設定金額と同じなら次の日へ
+        if ($max_combi == $set_price) break;
     }
-    echo $max_combi."\n"; // 設定金額に最も近い複合金額を表示
+    echo $max_combi."\n";
 }
 ?>

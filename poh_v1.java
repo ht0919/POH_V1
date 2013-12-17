@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Arrays;
+
 class  poh_v1 {
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,6 +18,8 @@ class  poh_v1 {
             String[] s = br.readLine().split(" ");
             price[i] = Integer.parseInt(s[0]);
         }
+        // ¤•i‹àŠz‚Ì•À‚×‘Ö‚¦
+        Arrays.sort(price);
 
         // ƒLƒƒƒ“ƒy[ƒ“İ’è‹àŠz‚Ìæ“¾
         for (int i=0; i < day_campaign; i++) {
@@ -28,9 +34,9 @@ class  poh_v1 {
                 // ©•ªˆÈ~‚Ì¤•i‚Ì”‚¾‚¯ŒJ‚è•Ô‚·
                 for (int k=j+1; k < num_goods; k++) {
                     int combi = price[j] + price[k];
-                    // •¡‡‹àŠz‚ªİ’è‹àŠzˆÈã‚È‚ç‚Æ“¯‚¶‚È‚çŸ‚Ì¤•i‚Ö
+                    // •¡‡‹àŠz‚ªİ’è‹àŠz‚æ‚è‘å‚«‚¢‚È‚çŸ‚Ì¤•i‚Ö
                     if (combi > set_price) continue;
-                    // •¡‡‹àŠz‚ªÅ‘å‹àŠzˆÈ‰º‚È‚çÅ‘å‹àŠz‚É‘ã“ü
+                    // •¡‡‹àŠz‚ªÅ‘å‹àŠz‚æ‚è‘å‚«‚¢‚È‚çÅ‘å‹àŠz‚É‘ã“ü
                     if (combi > max_combi) max_combi = combi;
                     // Å‘å‹àŠz‚ªİ’è‹àŠz‚Æ“¯‚¶‚È‚çŸ‚Ì“ú‚Ö
                     if (max_combi == set_price) break;
